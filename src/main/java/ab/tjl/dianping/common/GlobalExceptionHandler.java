@@ -22,13 +22,13 @@ public class GlobalExceptionHandler {
     public CommonRes doError(HttpServletRequest servletRequest, HttpServletResponse httpServletResponse, Exception ex){
         if(ex instanceof BusinessException){
             return CommonRes.create(((BusinessException)ex).getCommonError(),"fail");
-        }else if(ex instanceof NoHandlerFoundException){
+        }else if(ex instanceof NoHandlerFoundException){//执行路径错误
             CommonError commonError = new CommonError(EmBusinessError.NO_HANDLER_FOUND);
             return CommonRes.create(commonError,"fail");
-        }else if(ex instanceof ServletRequestBindingException){
+        }else if(ex instanceof ServletRequestBindingException){//请求参数错误
             CommonError commonError = new CommonError(EmBusinessError.BIND_EXCEPTION_ERROR);
             return CommonRes.create(commonError,"fail");
-        } else {
+        } else {//未知错误
             CommonError commonError = new CommonError(EmBusinessError.UNKNOWN_ERROR);
             return CommonRes.create(commonError,"fail");
         }
