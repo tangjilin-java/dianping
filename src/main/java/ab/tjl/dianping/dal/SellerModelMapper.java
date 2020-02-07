@@ -23,6 +23,7 @@ public interface SellerModelMapper {
 
     /**
      * 查询所有商家信息
+     *
      * @return
      */
     List<SellerModel> selectAll();
@@ -58,4 +59,11 @@ public interface SellerModelMapper {
      * @mbg.generated Fri Feb 07 13:16:55 CST 2020
      */
     int updateByPrimaryKey(SellerModel record);
+
+    /**
+     * 统计所有商户
+     *
+     * @return
+     */
+    Integer countAllSeller();
 }

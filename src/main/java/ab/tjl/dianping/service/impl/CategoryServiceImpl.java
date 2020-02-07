@@ -64,4 +64,13 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryModel> selectAll() {
         return categoryModelMapper.selectAll();
     }
+
+    /**
+     * 统计所有品类
+     * @return
+     */
+    @Override
+    public Integer countAllCategory() {
+        return categoryModelMapper.countAllCategory();
+    }
 }
