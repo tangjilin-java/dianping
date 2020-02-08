@@ -10,7 +10,7 @@ public class PageQuery {
 
     private Integer page = 1;
 
-    private Integer size = 2;
+    private Integer size = 8;
 
     public Integer getPage() {
         return page;

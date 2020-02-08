@@ -280,12 +280,12 @@
     window.onload = function() {
 
         var slider =
-            Swipe(document.getElementById('slider'), {
-                auto: 1000000,
-                continuous: true,
-                callback: function(pos) {
-                }
-            });
+                Swipe(document.getElementById('slider'), {
+                    auto: 1000000,
+                    continuous: true,
+                    callback: function(pos) {
+                    }
+                });
     }
 
     getFloat = function (number, n) {
@@ -322,16 +322,16 @@
                                     distanceStr = distance + " m";
                                 }
                                 var content = $('<a href="" class="item Fix hightitem">'+
-                                    '<div class="cnt">'+
-                                    '<img class="pic" src="'+dataList[i].iconUrl+'"/>'+
-                                    '<div class="wrap">'+
-                                    '<div class="wrap2">'+
-                                    '<div class="content">'+
-                                    '<div class="shopname">'+dataList[i].name+'</div><span class="distance">'+distanceStr+'</span>'+
-                                    '<div class="title">'+dataList[i].tags+'</div>'+
-                                    '<div class="info">'+
-                                    '<span class="symbol">¥</span>'+
-                                    '<span class="price">'+dataList[i].pricePerMan+'</span></div> </div> </div> </div> </div></a>');
+                                        '<div class="cnt">'+
+                                        '<img class="pic" src="'+dataList[i].iconUrl+'"/>'+
+                                        '<div class="wrap">'+
+                                        '<div class="wrap2">'+
+                                        '<div class="content">'+
+                                        '<div class="shopname">'+dataList[i].name+'</div><span class="distance">'+distanceStr+'</span>'+
+                                        '<div class="title">'+dataList[i].tags+'</div>'+
+                                        '<div class="info">'+
+                                        '<span class="symbol">¥</span>'+
+                                        '<span class="price">'+dataList[i].pricePerMan+'</span></div> </div> </div> </div> </div></a>');
                                 $("#tuanList").append(content);
                             }
                         }else{
@@ -356,20 +356,20 @@
             contentType:"application/json;charset=utf-8",
             url:"/user/getcurrentuser",
             success:function(data){
-                if(data.status == "success"){
-                    if(data.data == null){
-                        g_currentUser = null;
-                    }else{
-                        g_currentUser = data.data;
-                    }
-                    if(g_currentUser == null){
-                        $("#rightTitle").text("登录");
-                    }else{
-                        $("#rightTitle").text("注销");
-                    }
-                }else{
-                    alert("请求失败,原因为"+data.data.errMsg);
-                }
+                  if(data.status == "success"){
+                      if(data.data == null){
+                          g_currentUser = null;
+                      }else{
+                          g_currentUser = data.data;
+                      }
+                      if(g_currentUser == null){
+                          $("#rightTitle").text("登录");
+                      }else{
+                          $("#rightTitle").text("注销");
+                      }
+                  }else{
+                      alert("请求失败,原因为"+data.data.errMsg);
+                  }
             },
             error:function(data){
                 alert("网络请求失败，原因为"+data.responseText);
@@ -481,16 +481,16 @@
                                 distanceStr = distance + " m";
                             }
                             var content = $('<a href="" class="item Fix hightitem">'+
-                                '<div class="cnt">'+
-                                '<img class="pic" src="'+dataList[i].iconUrl+'"/>'+
-                                '<div class="wrap">'+
-                                '<div class="wrap2">'+
-                                '<div class="content">'+
-                                '<div class="shopname">'+dataList[i].name+'</div><span class="distance">'+distanceStr+'</span>'+
-                                '<div class="title">'+dataList[i].tags+'</div>'+
-                                '<div class="info">'+
-                                '<span class="symbol">¥</span>'+
-                                '<span class="price">'+dataList[i].pricePerMan+'</span></div> </div> </div> </div> </div></a>');
+                                    '<div class="cnt">'+
+                                    '<img class="pic" src="'+dataList[i].iconUrl+'"/>'+
+                                    '<div class="wrap">'+
+                                    '<div class="wrap2">'+
+                                    '<div class="content">'+
+                                    '<div class="shopname">'+dataList[i].name+'</div><span class="distance">'+distanceStr+'</span>'+
+                                    '<div class="title">'+dataList[i].tags+'</div>'+
+                                    '<div class="info">'+
+                                    '<span class="symbol">¥</span>'+
+                                    '<span class="price">'+dataList[i].pricePerMan+'</span></div> </div> </div> </div> </div></a>');
                             $("#searchList").append(content);
                         }
                         $("#categoryFilter").empty();

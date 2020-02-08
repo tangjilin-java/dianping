@@ -107,7 +107,13 @@ public class ShopServiceImpl implements ShopService {
     public Integer countAllShop() {
         return shopModelMapper.countAllShop();
     }
-/*
+
+    /**
+     *门店推荐
+     * @param longitude
+     * @param latitude
+     * @return
+     */
     @Override
     public List<ShopModel> recommend(BigDecimal longitude, BigDecimal latitude) {
         List<ShopModel> shopModelList = shopModelMapper.recommend(longitude, latitude);
@@ -118,16 +124,16 @@ public class ShopServiceImpl implements ShopService {
         return shopModelList;
     }
 
-   @Override
-    public List<Map<String, Object>> searchGroupByTags(String keyword, Integer categoryId, String tags) {
-        return shopModelMapper.searchGroupByTags(keyword,categoryId,tags);
-    }
-
-    @Override
-    public Integer countAllShop() {
-        return shopModelMapper.countAllShop();
-    }
-
+    /**
+     * 搜索服务V1.0
+     * @param longitude
+     * @param latitude
+     * @param keyword
+     * @param orderby
+     * @param categoryId
+     * @param tags
+     * @return
+     */
     @Override
     public List<ShopModel> search(BigDecimal longitude,
                                   BigDecimal latitude, String keyword,Integer orderby,
@@ -138,5 +144,17 @@ public class ShopServiceImpl implements ShopService {
             shopModel.setCategoryModel(categoryService.get(shopModel.getCategoryId()));
         });
         return shopModelList;
-    }*/
+    }
+
+    /**
+     * 根据标签筛选门店
+     * @param keyword
+     * @param categoryId
+     * @param tags
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> searchGroupByTags(String keyword, Integer categoryId, String tags) {
+        return shopModelMapper.searchGroupByTags(keyword,categoryId,tags);
+    }
 }

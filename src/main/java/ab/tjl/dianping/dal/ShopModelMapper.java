@@ -1,8 +1,11 @@
 package ab.tjl.dianping.dal;
 
 import ab.tjl.dianping.model.ShopModel;
+import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface ShopModelMapper {
     /**
@@ -64,4 +67,38 @@ public interface ShopModelMapper {
      * @mbg.generated Fri Feb 07 19:12:22 CST 2020
      */
     int updateByPrimaryKey(ShopModel record);
+
+    /**
+     * 门店推荐服务v1.0
+     * @param longitude
+     * @param latitude
+     * @return
+     */
+    List<ShopModel> recommend(@Param("longitude") BigDecimal longitude, @Param("latitude") BigDecimal latitude);
+
+    /**
+     * 搜索服务v1.0
+     * @param longitude
+     * @param latitude
+     * @param keyword
+     * @param orderby
+     * @param categoryId
+     * @param tags
+     * @return
+     */
+    List<ShopModel> search(@Param("longitude") BigDecimal longitude,
+                           @Param("latitude") BigDecimal latitude,
+                           @Param("keyword")String keyword,
+                           @Param("orderby")Integer orderby,
+                           @Param("categoryId")Integer categoryId,
+                           @Param("tags")String tags);
+
+    /**
+     * 根据标签筛选门店
+     * @param keyword
+     * @param categoryId
+     * @param tags
+     * @return
+     */
+    List<Map<String, Object>> searchGroupByTags(String keyword, Integer categoryId, String tags);
 }

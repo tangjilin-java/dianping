@@ -22,6 +22,7 @@
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="seller_id" jdbcType="INTEGER" property="sellerId" />
     <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+    <result column="distance" jdbcType="INTEGER" property="distance" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -256,5 +257,48 @@
     select
     count(1)
     from shop
+  </select>
+
+  <select id="recommend" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,ceil(1 + 1000*(2 * 6378.137* ASIN(SQRT(POW(SIN(PI() * (#{latitude} - latitude) / 360), 2) + COS(PI() * #{latitude} / 180)
+    * COS(latitude* PI() / 180) * POW(SIN(PI() * (#{longitude} - longitude) / 360), 2))))) AS distance
+    from shop order by (0.95*1/log10(distance)+ 0.05*remark_score/5)  DESC
+  </select>
+
+  <select id="search" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,ceil(1 + 1000*(2 * 6378.137* ASIN(SQRT(POW(SIN(PI() * (#{latitude} - latitude) / 360), 2) + COS(PI() * #{latitude} / 180)
+    * COS(latitude* PI() / 180) * POW(SIN(PI() * (#{longitude} - longitude) / 360), 2))))) AS distance
+    from shop where name like CONCAT('%',#{keyword},'%')
+    <if test="categoryId != null">
+      and category_id = #{categoryId}
+    </if>
+    <if test="tags != null">
+      and tags = #{tags}
+    </if>
+
+    <if test="orderby == null">
+      order by (0.95*1/log10(distance)+ 0.05*remark_score/5)  DESC
+    </if>
+    <if test="orderby == 1">
+      order by price_per_man ASC,id ASC
+    </if>
+
+
+  </select>
+
+
+  <select id="searchGroupByTags" resultType="java.util.Map">
+    select tags,count(1) as num from shop where name like CONCAT('%',#{keyword},'%')
+    <if test="categoryId != null">
+      and category_id = #{categoryId}
+    </if>
+    <if test="tags != null">
+      and tags = #{tags}
+    </if>
+    group by tags
   </select>
 </mapper>
