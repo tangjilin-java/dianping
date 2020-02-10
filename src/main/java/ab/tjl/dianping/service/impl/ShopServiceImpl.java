@@ -10,12 +10,18 @@ import ab.tjl.dianping.service.CategoryService;
 import ab.tjl.dianping.service.SellerService;
 import ab.tjl.dianping.service.ShopService;
 
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +42,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private SellerService sellerService;
+
+    @Autowired
+    private RestHighLevelClient highLevelClient;
 
     /**
      * 创建门店
@@ -156,5 +165,10 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<Map<String, Object>> searchGroupByTags(String keyword, Integer categoryId, String tags) {
         return shopModelMapper.searchGroupByTags(keyword,categoryId,tags);
+    }
+
+    @Override
+    public Map<String, Object> searchES(BigDecimal longitude, BigDecimal latitude, String keyword, Integer orderby, Integer categoryId, String tags) throws IOException {
+       return null;
     }
 }

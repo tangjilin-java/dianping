@@ -32,7 +32,7 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public SellerModel create(SellerModel sellerModel) {
         sellerModel.setCreatedAt(new Date());
-        sellerModel.setUodatedAt(new Date());
+        sellerModel.setUpdatedAt(new Date());
         sellerModel.setRemarkScore(new BigDecimal(0));
         sellerModel.setDisabledFlag(0);
         sellerModelMapper.insertSelective(sellerModel);
